@@ -1,0 +1,277 @@
+<html>
+
+<head>
+    <met" name="ingredients" ort" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="./css/main.css">
+    <link rel="sistema" type="sistema/js" href="./js/sistema.js">
+    <title> Ta No Prato </title>
+</head>
+
+
+<body>
+
+    <header class="menu-principal">
+        <main>
+            <div class="header-1">
+            </div>
+
+            <div class="container">
+
+                <div class="logo">
+
+                    <img src="./img/logo.png">
+                </div>
+                <div class="search-box">
+                    <input type="text" class="search-txt" placeholder="Pesquisar..." class="pesquisar">
+                    <a href="#" class="search-btn">
+                        <img src="./img/BUSCAR.png" height="30" width="30">
+                    </a>
+                </div>
+                <div class="about-us">
+                    <li><a href="https://www.instagram.com/p/Ck0mOCBLixh/?igshid=YmMyMTA2M2Y=" target="_blank"><img
+                                src="./img/SOBRENOS.png"></a></li>
+                </div>
+                <div class="redes-sociais">
+                    <ul>
+                        <li><a href="https://twitter.com/tano_prato?t=eCB_PheHK1VNJt9T4B-ruQ&s=09" target="_blank"><img
+                                    src="./img/twitter.png" /></a></li>
+                        <li><a href="https://www.tiktok.com/@tano_prato?_t=8XGbRBWDiOE&_r=1" target="_blank"><img
+                                    src="./img/tiktok.png" /></a></li>
+                        <li><a href="https://instagram.com/tano_prato?igshid=YmMyMTA2M2Y=" target="_blank"><img
+                                    src="./img/insta.png" /></a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </main>
+    </header>
+    <div id="inicio" class="inicio">
+        <main>
+            <div class="quadrado">
+
+            </div>
+
+            <div class="titulo">
+                <img src="./img/DISPONIVEIS.png" height="80" width="626">
+            </div>
+        </main>
+
+
+
+
+        <div>
+
+
+            <form id="form" class="ingredientes">
+
+
+                <div class="a"> <input type="checkbox" name="ingredients" id="iban" value="Banana"> <label
+                        for="iban">Banana</label><br>
+                </div>
+                <div class="b"> <input type="checkbox" name="ingredients" id="iovo" value="Ovo"> <label
+                        for="iovo">Ovo</label><br>
+                </div>
+                <div class="c"> <input type="checkbox" name="ingredients" id="iacu" value="Açúcar"> <label
+                        for="iacu">Açúcar</label><br>
+                </div>
+                <div class="d"> <input type="checkbox" name="ingredients" id="ifdt" value="Farinha de Trigo"> <label
+                        for="ifdt">Farinha
+                        de
+                        Trigo</label><br>
+                </div>
+                <div class="e"> <input type="checkbox" name="ingredients" id="ilei" value="Leite"> <label
+                        for="ilei">Leite</label><br>
+                </div>
+                <div class="f"> <input type="checkbox" name="ingredients" id="imil" value="Milho"> <label
+                        for="imil">Milho</label><br>
+                </div>
+                <div class="g"> <input type="checkbox" name="ingredients" id="iole" value="Óleo"> <label
+                        for="iole">Óleo</label><br>
+                </div>
+                <div class="i"> <input type="checkbox" name="ingredients" id="ifep" value="Fermento em Pó"> <label
+                        for="ifep">Fermento em
+                        Pó</label><br> </div>
+                <div class="j"> <input type="checkbox" name="ingredients" id="iceb" value="Cebola"> <label
+                        for="iceb">Cebola</label><br>
+                </div>
+                <div class="k"> <input type="checkbox" name="ingredients" id="ibat" value="Batata"> <label
+                        for="ibat">Batata</label><br>
+                </div>
+                <div class="l"> <input type="checkbox" name="ingredients" id="ifub" value="Fubá"> <label
+                        for="ifub">Fubá</label><br>
+                </div>
+                <div class="m"> <input type="checkbox" name="ingredients" id="ifra" value="Frango"> <label
+                        for="ifra">Frango</label><br>
+                </div>
+                <div class="n"> <input type="checkbox" name="ingredients" id="ifdr" value="Farinha de Rosca"> <label
+                        for="ifdr">Farinha
+                        de
+                        Rosca</label><br>
+                </div>
+        </div>
+
+
+        <input type="submit" value="BUSCAR" id="FILTRAR">
+        </form>
+
+    </div>
+
+    <script>
+
+        const form = document.querySelector("form");
+
+        const recipes = (receita) => {
+            const wrapper = document.createElement("div");
+            wrapper.innerHTML = `
+      <h2 class="nome">${receita.nome} </h2>
+      <img  src=${receita.foto} width = 249px class="picture" />
+      <h3 class="fone">Ingredientes:</h3>
+      <ul >
+        ${receita.ingrediente.map(ingrediente).join("")}
+      </ul>
+      
+      `;
+            return wrapper;
+        }
+        const ingrediente = (ingredient) => `<li class="teste">${ingredient}</li>`;
+
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(form);
+            const ingredients = formData.getAll("ingredients");
+            const result = json.filter((receita) => {
+                return receita.ingrediente.every(ingredient => ingredients.includes(ingredient))
+            })
+
+            const receitasDiv = document.querySelector("#resultados")
+            result.forEach(r => {
+                receitasDiv.appendChild(recipes(r))
+            })
+
+            console.log(result);
+            console.log(ingredients);
+            document.querySelector("#inicio").style.display = "none";
+            document.querySelector("#resultados").style.display = "flex"
+
+        })
+
+        var json = [
+            {
+                "nome": "Panqueca de Banana",
+                "ingrediente": [
+                    "Banana", "Ovo", "Açúcar", "Farinha de Trigo", "Leite"
+                ],
+                "foto": "./img/panquecabanana.jpg"
+            },
+            {
+
+                "nome": "Bolo de Milho",
+                "ingrediente": [
+                    "Milho", "Leite", "Açúcar", "Óleo", "Ovo", "Fermento em Pó"
+                ],
+                "foto": "./img/bolomilho.jpg"
+            },
+            {
+
+                "nome": "Salada de Ovo",
+                "ingrediente": [
+                    "Cebola", "Batata", "Maionese", "Óleo", "Ovo"
+                ],
+                "foto": "./img/saladaovo.jpg"
+            },
+            {
+                "nome": "Bolo de Fubá",
+                "ingrediente": [
+                    "Ovo", "Açúcar", "Fubá", "Farinha de Trigo", "Óleo", "Leite", "Fermento em Pó"
+                ],
+                "foto": "./img/bolofuba.jpg"
+            },
+            {
+
+                "nome": "Hambúrguer de Frango",
+                "ingrediente": [
+                    "Frango", "Cebola", "Farinha de Rosca", "Ovo", "Maionese", "Óleo"
+                ],
+                "foto": "./img/hamburguerfrango.jpg"
+            },
+            {
+
+                "nome": "Banana á Milanesa",
+                "ingrediente": [
+                    "Banana", "Farinha de Trigo", "Farinha de Rosca", "Ovo", "Açúcar", "Óleo"
+                ],
+                "foto": "./img/bananafrita.jpg"
+            },
+            {
+
+                "nome": "Frango á Milanesa",
+                "ingrediente": [
+                    "Frango", "Farinha de Rosca", "Farinha de Trigo", "Ovo "
+                ],
+                "foto": "./img/frangofrito.jpg"
+            },
+            {
+
+                "nome": "Sanduíche Natural",
+                "ingrediente": [
+                    "Frango", "Maionese", "Milho, "
+                ],
+                "foto": "./img/sanduichenatural.jpg"
+            },
+            {
+
+                "nome": "Creme de Milho",
+                "ingrediente": [
+                    "Milho", "Leite", "Óleo", "Cebola"
+                ],
+                "foto": "./img/crememilho.jpg"
+            },
+            {
+
+                "nome": "Suspiro",
+                "ingrediente": [
+                    "Açúcar", "Ovo"
+                ],
+                "foto": "./img/suspiro.jpg"
+            },
+            {
+
+                "nome": "Batata Frita",
+                "ingrediente": [
+                    "Batata", "Óleo"
+                ],
+                "foto": "./img/batatafrita.jpg"
+            },
+            {
+                "nome": "Vitamina de Banana",
+                "ingrediente": [
+                    "Banana", "Leite"
+                ],
+                "foto": "./img/vitaminabanana.jpg"
+            }
+
+
+        ]
+
+
+
+
+
+
+
+    </script>
+
+
+    <div id="resultados" class="resultados">
+
+        <div class="ventilador">
+            <h1>RESULTADOS</h1>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
